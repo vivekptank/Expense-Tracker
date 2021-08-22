@@ -1,0 +1,33 @@
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+    `userid`    INTEGER PRIMARY KEY AUTOINCREMENT,
+    `username`    VARCHAR ( 50 ),
+    `passcode`    VARCHAR ( 6 )
+);
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+    `categoryid`    INTEGER PRIMARY KEY AUTOINCREMENT,
+    `categoryname`    VARCHAR ( 50 )
+);
+
+INSERT INTO "categories" ("categoryname") VALUES
+('Fuel'),
+('Food'),
+('Shopping'),
+('Electronics'),
+('Subscriptions');
+
+DROP TABLE IF EXISTS `expenses`;
+CREATE TABLE IF NOT EXISTS `expenses` (
+    `id`    INTEGER PRIMARY KEY AUTOINCREMENT,
+    `title`    VARCHAR ( 50 ),
+    `amount` DOUBLE,
+    `date` datetime,
+    `notes` TEXT,
+    `userid` INTEGER,
+    `categoryid` INTEGER,
+    FOREIGN KEY(`categoryid`) REFERENCES `categories`(`categoryid`),
+    FOREIGN KEY(`userid`) REFERENCES `users`(`userid`)
+);
+
